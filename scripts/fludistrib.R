@@ -2,13 +2,11 @@
 library(plyr)
 #install.packages("dplyr")
 
-#tweets<-read.csv("C:\\Users\\vh17342\\Desktop\\2018_IEU_Data_Challenge\\Twitter_flutweets\\flutweets_semicolon-delim.csv", sep=";", header=T, fill=T)
-
 gp_satisfied<-read.csv("C:\\Users\\vh17342\\Desktop\\2018_IEU_Data_Challenge\\GP_PatientExperience\\NHSOF_4a.i_I00739_D.csv")
 gp_overload<-read.csv("C:\\Users\\vh17342\\Desktop\\2018_IEU_Data_Challenge\\Unnecessary_Emergency_Admissions\\CCG_3.1_I00759_D.csv")
-hist(density(gp_satisfied$Indicator.value))
-hist(gp_satisfied$Indicator.value)
-hist(gp_overload$Indicator.value)
+
+#hist(gp_satisfied$Indicator.value)
+#hist(gp_overload$Indicator.value)
 
 gp_overload_person<-gp_overload[gp_overload$Gender=="Person",-3]
 colnames(gp_overload_person)[1]<-"Year"
@@ -22,14 +20,12 @@ colnames(joined_age)[7]<-"Indicator.value.satisfied"
 compare<-compare[compare$Level %in% c("25 to 34","45 to 54"),]
 
 compare<-joined_age[,c(1,7,14,16)]
-plot(compare$Year,compare$Indicator.value.satisfied, cex.axis=0.5, col="red", type="l")
-par(new=T)
-plot(compare$Year,compare$Indicator.value, col="green")
-
-#coplot(Indicator.value ~ Year | Level, compare, col=c("red","green","blue"))
+#plot(compare$Year,compare$Indicator.value.satisfied, cex.axis=0.5, col="red", type="l")
+#par(new=T)
+#plot(compare$Year,compare$Indicator.value, col="green")
 
 library(ggplot2)
-head(compare)
+#head(compare)
 
 compare$Indicator.value<-as.numeric(compare$Indicator.value)
 
